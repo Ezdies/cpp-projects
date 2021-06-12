@@ -177,13 +177,15 @@ void infiniteMode(int &playerScore, int &aiScore, string move, int winState)
 void roundsMode(int &playerScore, int &aiScore, string move, int winState)
 {
     int roundsLimit;
-    cout << "How many rounds do you want to play?" << endl;
+    cout << "How many rounds do you want to play?"
+         << endl;
     cin >> roundsLimit;
-    int roundCounter = 0;
+    int roundCounter = 1;
 
-    while (roundCounter != roundsLimit)
+    while (roundCounter != roundsLimit + 1)
     {
-        cout << "Make a move" << endl;
+        cout << "Round " << roundCounter << endl;
+        cout << "\nMake a move" << endl;
         cin >> move;
 
         if (move == "@")
@@ -192,7 +194,8 @@ void roundsMode(int &playerScore, int &aiScore, string move, int winState)
         }
         else
         {
-            roundCounter++;
+            if (isCorrectName(move))
+                roundCounter++;
             winState = drawState();
             printMoves(move, winState);
             result(move, winState);
@@ -200,8 +203,11 @@ void roundsMode(int &playerScore, int &aiScore, string move, int winState)
             cout << endl;
         }
     }
-    cout << "End of round. " << endl;
-    printWinner(playerScore, aiScore);
+    if (roundCounter == roundsLimit + 1)
+    {
+        cout << "End of round. " << endl;
+        printWinner(playerScore, aiScore);
+    }
 }
 
 void selectMode(int &playerScore, int &aiScore, string move, int winState)
@@ -220,7 +226,7 @@ void selectMode(int &playerScore, int &aiScore, string move, int winState)
     }
     case 2:
     {
-        cout << "You selected rounds mode." << endl;
+        cout << "\nYou selected rounds mode." << endl;
         roundsMode(playerScore, aiScore, move, winState);
         break;
     }
