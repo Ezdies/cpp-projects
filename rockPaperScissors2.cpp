@@ -21,7 +21,7 @@ bool isCorrectName(string move)
     return false;
 }
 
-int moves()
+int drawState()
 {
     int playerMove = rand() % 3;
     int aiMove = rand() % 3;
@@ -150,10 +150,10 @@ int main(int argc, char const *argv[])
         }
         else
         {
-            int points = moves();
-            printMoves(move, points);
-            result(move, points);
-            scoreCounter(playerScore, aiScore, move, points);
+            int winState = drawState();
+            printMoves(move, winState);
+            result(move, winState);
+            scoreCounter(playerScore, aiScore, move, winState);
             cout << endl;
         }
     }
