@@ -7,8 +7,8 @@ using namespace std;
 
 void greeting()
 {
-    cout << "Welcome in out Rock, Paper, Scissors game" << endl;
-    cout << "Write rock, paper or scissors to start playing and @ to exit \n"
+    cout << "Welcome in out Rock, Paper, Scissors game." << endl;
+    cout << "Write rock, paper or scissors to start playing and @ to exit. \n"
          << endl;
 }
 
@@ -36,6 +36,59 @@ int moves()
     return 0;
 }
 
+void printMoves(string move, int points)
+{
+
+    if (isCorrectName(move))
+    {
+        if (points == 0 && move == "rock")
+        {
+            cout << "Player plays rock" << endl;
+            cout << "AI plays scissors" << endl;
+        }
+        if (points == 0 && move == "paper")
+        {
+            cout << "Player plays paper" << endl;
+            cout << "AI plays rock" << endl;
+        }
+        if (points == 0 && move == "scissors")
+        {
+            cout << "Player plays scissors" << endl;
+            cout << "AI plays paper" << endl;
+        }
+        if (points == 1 && move == "rock")
+        {
+            cout << "Player plays rock" << endl;
+            cout << "AI plays paper" << endl;
+        }
+        if (points == 1 && move == "paper")
+        {
+            cout << "Player plays paper" << endl;
+            cout << "AI plays scissors" << endl;
+        }
+        if (points == 1 && move == "scissors")
+        {
+            cout << "Player plays scissors" << endl;
+            cout << "AI plays rock" << endl;
+        }
+        if (points == 2 && move == "rock")
+        {
+            cout << "Player plays rock" << endl;
+            cout << "AI plays rock" << endl;
+        }
+        if (points == 2 && move == "paper")
+        {
+            cout << "Player plays paper" << endl;
+            cout << "AI plays paper" << endl;
+        }
+        if (points == 2 && move == "scissors")
+        {
+            cout << "Player plays scissors" << endl;
+            cout << "AI plays scissors" << endl;
+        }
+    }
+}
+
 void scoreCounter(int &playerScore, int &aiScore, string move, int points)
 {
     if (isCorrectName(move))
@@ -47,6 +100,7 @@ void scoreCounter(int &playerScore, int &aiScore, string move, int points)
         }
         if (points == 1) //ai wins
         {
+
             cout << "Player: " << playerScore;
             cout << " AI: " << ++aiScore << endl;
         }
@@ -58,7 +112,7 @@ void scoreCounter(int &playerScore, int &aiScore, string move, int points)
     }
 }
 
-void gameplay(string move, int points)
+void result(string move, int points)
 {
 
     if (isCorrectName(move))
@@ -97,9 +151,9 @@ int main(int argc, char const *argv[])
         else
         {
             int points = moves();
-            gameplay(move, points);
+            printMoves(move, points);
+            result(move, points);
             scoreCounter(playerScore, aiScore, move, points);
-
             cout << endl;
         }
     }
