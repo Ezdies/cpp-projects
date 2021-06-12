@@ -5,6 +5,14 @@
 
 using namespace std;
 
+void modeSelection()
+{
+    cout << "Select a mode: \n"
+         << "1. Infinite mode. \n"
+         << "2. Rounds mode. \n"
+         << endl;
+}
+
 void greeting()
 {
     cout << "Welcome in out Rock, Paper, Scissors game." << endl;
@@ -89,6 +97,22 @@ void printMoves(string move, int points)
     }
 }
 
+void printWinner(int &playerScore, int &aiScore)
+{
+    if (playerScore > aiScore)
+    {
+        cout << "Player won!" << endl;
+    }
+    else if (aiScore > playerScore)
+    {
+        cout << "AI won!" << endl;
+    }
+    else
+    {
+        cout << "Draw!" << endl;
+    }
+}
+
 void scoreCounter(int &playerScore, int &aiScore, string move, int points)
 {
     if (isCorrectName(move))
@@ -112,33 +136,24 @@ void scoreCounter(int &playerScore, int &aiScore, string move, int points)
     }
 }
 
-void result(string move, int points)
+void result(string move, int winState)
 {
 
     if (isCorrectName(move))
     {
-        if (points == 0)
+        if (winState == 0)
             cout << "Player wins \n";
-        if (points == 1)
+        if (winState == 1)
             cout << "AI wins \n";
-        if (points == 2)
+        if (winState == 2)
             cout << "Draw \n";
     }
     else
         cout << "Wrong move \n";
 }
 
-int main(int argc, char const *argv[])
+void infiniteMode(int &playerScore, int &aiScore, string move, int winState)
 {
-    srand(time(NULL));
-
-    int aiScore = 0;
-    int playerScore = 0;
-
-    string move;
-
-    greeting();
-
     while (true)
     {
         cout << "Make a move" << endl;
@@ -150,12 +165,84 @@ int main(int argc, char const *argv[])
         }
         else
         {
-            int winState = drawState();
+            winState = drawState();
             printMoves(move, winState);
             result(move, winState);
             scoreCounter(playerScore, aiScore, move, winState);
             cout << endl;
         }
     }
+}
+
+void roundsMode(int &playerScore, int &aiScore, string move, int winState)
+{
+    int roundsLimit;
+    cout << "How many rounds do you want to play?" << endl;
+    cin >> roundsLimit;
+    int roundCounter = 0;
+
+    while (roundCounter != roundsLimit)
+    {
+        cout << "Make a move" << endl;
+        cin >> move;
+
+        if (move == "@")
+        {
+            break;
+        }
+        else
+        {
+            roundCounter++;
+            winState = drawState();
+            printMoves(move, winState);
+            result(move, winState);
+            scoreCounter(playerScore, aiScore, move, winState);
+            cout << endl;
+        }
+    }
+    cout << "End of round. " << endl;
+    printWinner(playerScore, aiScore);
+}
+
+void selectMode(int &playerScore, int &aiScore, string move, int winState)
+{
+    int mode;
+    modeSelection();
+    cin >> mode;
+
+    switch (mode)
+    {
+    case 1:
+    {
+        cout << "You selected infinite mode." << endl;
+        infiniteMode(playerScore, aiScore, move, winState);
+        break;
+    }
+    case 2:
+    {
+        cout << "You selected rounds mode." << endl;
+        roundsMode(playerScore, aiScore, move, winState);
+        break;
+    }
+    default:
+    {
+        cout << "No such mode found." << endl;
+        break;
+    }
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    srand(time(NULL));
+
+    int aiScore = 0;
+    int playerScore = 0;
+    int winState = drawState();
+    string move;
+
+    greeting();
+    selectMode(playerScore, aiScore, move, winState);
+
     return 0;
 }
