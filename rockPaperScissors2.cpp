@@ -38,25 +38,18 @@ void scoreCounter(int &playerScore, int &aiScore, string move, int points)
 {
     if (isCorrectName(move))
     {
-        if (points == 0)
+        if (points == 0) //player wins
         {
-            playerScore++;
-
-            cout << "Player: " << playerScore;
+            cout << "Player: " << ++playerScore;
             cout << " AI: " << aiScore << endl;
         }
-        if (points == 1)
+        if (points == 1) //ai wins
         {
-            aiScore++;
-
             cout << "Player: " << playerScore;
-            cout << " AI: " << aiScore << endl;
+            cout << " AI: " << ++aiScore << endl;
         }
-        if (points == 2)
+        if (points == 2) //draw
         {
-            playerScore++;
-            aiScore++;
-
             cout << "Player: " << playerScore;
             cout << " AI: " << aiScore << endl;
         }
