@@ -32,6 +32,8 @@ int moves()
         return 1;
     if (playerMove == aiMove)
         return 2;
+
+    return 0;
 }
 
 void scoreCounter(int &playerScore, int &aiScore, string move, int points)
