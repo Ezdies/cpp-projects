@@ -152,11 +152,23 @@ void result(string move, int winState)
         cout << "Wrong move \n";
 }
 
+void printingResults(int &playerScore, int &aiScore, string move, int winState)
+{
+    winState = drawState();
+    printMoves(move, winState);
+    result(move, winState);
+    scoreCounter(playerScore, aiScore, move, winState);
+    cout << endl;
+}
+
 void infiniteMode(int &playerScore, int &aiScore, string move, int winState)
 {
+    int roundCounter = 1;
+
     while (true)
     {
-        cout << "Make a move" << endl;
+        cout << "Round " << roundCounter++ << endl;
+        cout << "\nMake a move" << endl;
         cin >> move;
 
         if (move == "@")
@@ -165,11 +177,7 @@ void infiniteMode(int &playerScore, int &aiScore, string move, int winState)
         }
         else
         {
-            winState = drawState();
-            printMoves(move, winState);
-            result(move, winState);
-            scoreCounter(playerScore, aiScore, move, winState);
-            cout << endl;
+            printingResults(playerScore, aiScore, move, winState);
         }
     }
 }
@@ -196,11 +204,7 @@ void roundsMode(int &playerScore, int &aiScore, string move, int winState)
         {
             if (isCorrectName(move))
                 roundCounter++;
-            winState = drawState();
-            printMoves(move, winState);
-            result(move, winState);
-            scoreCounter(playerScore, aiScore, move, winState);
-            cout << endl;
+            printingResults(playerScore, aiScore, move, winState);
         }
     }
     if (roundCounter == roundsLimit + 1)
