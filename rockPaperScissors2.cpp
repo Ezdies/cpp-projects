@@ -167,7 +167,7 @@ void infiniteMode(int &playerScore, int &aiScore, string move, int winState)
 
     while (true)
     {
-        cout << "Round " << roundCounter++ << endl;
+        cout << "Round " << roundCounter << endl;
         cout << "\nMake a move" << endl;
         cin >> move;
 
@@ -177,6 +177,8 @@ void infiniteMode(int &playerScore, int &aiScore, string move, int winState)
         }
         else
         {
+            if (isCorrectName(move))
+                roundCounter++;
             printingResults(playerScore, aiScore, move, winState);
         }
     }
