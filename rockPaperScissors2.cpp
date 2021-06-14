@@ -16,7 +16,7 @@ void modeSelection()
 void greeting()
 {
     cout << "Welcome in out Rock, Paper, Scissors game." << endl;
-    cout << "Write rock, paper or scissors to start playing and @ to exit. \n"
+    cout << "Write rock, paper or scissors to start playing and @ to exit. :) \n"
          << endl;
 }
 
